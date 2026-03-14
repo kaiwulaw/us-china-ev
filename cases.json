@@ -1,0 +1,170 @@
+[
+  {
+    "id": "001",
+    "title": "In re Tesla Autopilot Litigation — consolidated product liability class action",
+    "jurisdiction": "US",
+    "court": "N.D. Cal.",
+    "docket": "3:26-cv-01142",
+    "filed": "2026-02-14",
+    "decided": "",
+    "status": "Pending",
+    "claim_types": ["Product liability", "Class action", "Autonomous vehicle"],
+    "vehicle_type": "EV",
+    "parties": {
+      "plaintiff": "Class plaintiffs (approx. 1,400 members)",
+      "defendant": "Tesla, Inc."
+    },
+    "summary": "Consolidated class action alleging Tesla's Autopilot and Full Self-Driving systems are defective and that Tesla misrepresented their capabilities to consumers. Plaintiffs allege injuries arising from collisions and near-misses attributable to system failures.",
+    "tags": ["Autonomous vehicle", "Product liability", "Class action", "EV", "Misrepresentation"],
+    "source_url": "",
+    "added": "2026-03-01",
+    "verified": true
+  },
+  {
+    "id": "002",
+    "title": "Beijing Consumers Association v. Zhejiang Geely Holding Group — battery fire disclosure claim",
+    "jurisdiction": "CN",
+    "court": "Beijing No.3 Intermediate People's Court",
+    "docket": "",
+    "filed": "2026-01-28",
+    "decided": "",
+    "status": "Pending",
+    "claim_types": ["Consumer protection", "Public interest litigation"],
+    "vehicle_type": "EV",
+    "parties": {
+      "plaintiff": "Beijing Consumers Association (北京市消费者协会)",
+      "defendant": "Zhejiang Geely Holding Group Co., Ltd."
+    },
+    "summary": "Consumer advocacy organization alleges Geely failed to timely disclose known battery thermal runaway defects in the Galaxy E8 model, resulting in underreporting of fire incidents to SAMR. Claims violation of the Consumer Rights Protection Law (消费者权益保护法) Art. 20 and the Product Quality Law Art. 27.",
+    "tags": ["EV battery", "Consumer protection", "信息披露", "公益诉讼"],
+    "source_url": "",
+    "added": "2026-03-01",
+    "verified": true
+  },
+  {
+    "id": "003",
+    "title": "Ford Motor Co. v. Contemporary Amperex Technology Co. (CATL) — trade secret misappropriation re LFP cell manufacturing",
+    "jurisdiction": "BOTH",
+    "court": "E.D. Mich. + Shenzhen IP Court",
+    "docket": "2:25-cv-13441",
+    "filed": "2025-12-05",
+    "decided": "",
+    "status": "Pending",
+    "claim_types": ["Trade secret", "IP"],
+    "vehicle_type": "EV",
+    "parties": {
+      "plaintiff": "Ford Motor Company",
+      "defendant": "Contemporary Amperex Technology Co., Ltd. (CATL)"
+    },
+    "summary": "Ford alleges CATL misappropriated proprietary manufacturing processes for lithium iron phosphate (LFP) cells developed during their joint BlueOval SK battery venture. Parallel proceedings filed in both E.D. Michigan and Shenzhen IP Court. Case raises novel questions of cross-border trade secret enforcement and choice of law.",
+    "tags": ["Trade secret", "EV battery", "Cross-border", "IP", "LFP"],
+    "source_url": "",
+    "added": "2026-03-01",
+    "verified": true
+  },
+  {
+    "id": "004",
+    "title": "Li Mou v. BYD Auto Co., Ltd. — lemon law claim, range degradation after OTA software update",
+    "jurisdiction": "CN",
+    "court": "Shenzhen Nanshan District People's Court",
+    "docket": "",
+    "filed": "2025-10-31",
+    "decided": "2026-02-06",
+    "status": "Decided — plaintiff awarded",
+    "claim_types": ["Consumer protection", "Lemon law / warranty"],
+    "vehicle_type": "EV",
+    "parties": {
+      "plaintiff": "Li Mou (李某)",
+      "defendant": "BYD Auto Co., Ltd."
+    },
+    "summary": "Plaintiff alleged that BYD's OTA update (v2.3.1, released Sep 2025) reduced the Han EV's rated range by 18% without consumer consent or adequate disclosure, constituting a product defect under the Three-Package Rules for Automobiles. Court awarded full refund plus 10% punitive supplement under the Consumer Rights Protection Law Art. 55.",
+    "tags": ["EV", "OTA update", "消费者权益", "三包规定", "Decided"],
+    "source_url": "",
+    "added": "2026-03-01",
+    "verified": true
+  },
+  {
+    "id": "005",
+    "title": "State of California v. Volkswagen Group of America, Inc. — residual emissions fraud enforcement",
+    "jurisdiction": "US",
+    "court": "Cal. Super. Ct., Sacramento County",
+    "docket": "",
+    "filed": "2025-11-19",
+    "decided": "",
+    "status": "Settlement talks",
+    "claim_types": ["Emissions / fraud", "Environmental / regulatory"],
+    "vehicle_type": "ICE",
+    "parties": {
+      "plaintiff": "State of California (AG)",
+      "defendant": "Volkswagen Group of America, Inc."
+    },
+    "summary": "California AG alleges Volkswagen continued to deploy defeat device logic in MY2022–2024 turbocharged ICE vehicles sold in California, in violation of the state's 2020 consent decree arising from the Dieselgate settlement. Action seeks civil penalties of $37,500 per violation under the California Clean Air Act and Health & Safety Code § 43016.",
+    "tags": ["Emissions fraud", "State AG", "ICE vehicle", "Defeat device", "Consent decree"],
+    "source_url": "",
+    "added": "2026-03-01",
+    "verified": true
+  },
+  {
+    "id": "006",
+    "title": "Wang Xiaoming v. NIO, Inc. — sudden unintended acceleration resulting in highway collision",
+    "jurisdiction": "CN",
+    "court": "Shanghai No.1 Intermediate People's Court",
+    "docket": "",
+    "filed": "2025-10-14",
+    "decided": "",
+    "status": "Pending",
+    "claim_types": ["Product liability"],
+    "vehicle_type": "EV",
+    "parties": {
+      "plaintiff": "Wang Xiaoming (王小明)",
+      "defendant": "NIO, Inc."
+    },
+    "summary": "Plaintiff alleges NIO's ES8 accelerated uncontrollably at highway speeds due to a software defect in the drive control unit, causing a rear-end collision with personal injury. NIO disputes the characterization and points to driver error data from on-board telemetry. Case involves competing expert testimony on EDR data interpretation.",
+    "tags": ["Product liability", "EV", "软件缺陷", "Personal injury"],
+    "source_url": "",
+    "added": "2026-03-01",
+    "verified": true
+  },
+  {
+    "id": "007",
+    "title": "Rivian Automotive, Inc. v. Scout Motors Inc. — trade dress infringement, vehicle design",
+    "jurisdiction": "US",
+    "court": "N.D. Ill.",
+    "docket": "1:25-cv-08834",
+    "filed": "2025-09-08",
+    "decided": "",
+    "status": "Pending",
+    "claim_types": ["Patent / IP"],
+    "vehicle_type": "EV",
+    "parties": {
+      "plaintiff": "Rivian Automotive, Inc.",
+      "defendant": "Scout Motors Inc."
+    },
+    "summary": "Rivian alleges Scout's Terra pickup truck and Traveler SUV designs improperly copy Rivian's distinctive 'stadium lighting' front lamp design and overall vehicle silhouette trade dress, creating consumer confusion in the electric truck market. Motion to dismiss pending; Scout argues trade dress is functional and lacks secondary meaning.",
+    "tags": ["IP", "Trade dress", "EV", "Design"],
+    "source_url": "",
+    "added": "2026-03-01",
+    "verified": true
+  },
+  {
+    "id": "008",
+    "title": "Chen v. SAIC-GM-Wuling Automobile — airbag non-deployment, Hongguang MINI EV",
+    "jurisdiction": "CN",
+    "court": "Liuzhou Intermediate People's Court",
+    "docket": "",
+    "filed": "2025-08-22",
+    "decided": "2026-01-10",
+    "status": "Decided — defendant liable",
+    "claim_types": ["Product liability"],
+    "vehicle_type": "EV",
+    "parties": {
+      "plaintiff": "Chen (陈某)",
+      "defendant": "SAIC-GM-Wuling Automobile Co., Ltd."
+    },
+    "summary": "Plaintiff sustained serious injuries in a frontal collision when airbags failed to deploy in the Hongguang MINI EV at speeds triggering deployment per specifications. Court found product defect under the Product Quality Law Art. 41, ordering compensation of ¥340,000. Defendant has appealed to the Guangxi Higher People's Court.",
+    "tags": ["Product liability", "EV", "Airbag", "产品质量", "On appeal"],
+    "source_url": "",
+    "added": "2026-03-01",
+    "verified": true
+  }
+]
