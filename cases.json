@@ -32,11 +32,11 @@
     "claim_types": ["Consumer protection", "Public interest litigation"],
     "vehicle_type": "EV",
     "parties": {
-      "plaintiff": "Beijing Consumers Association (北京市消费者协会)",
+      "plaintiff": "Beijing Consumers Association",
       "defendant": "Zhejiang Geely Holding Group Co., Ltd."
     },
-    "summary": "Consumer advocacy organization alleges Geely failed to timely disclose known battery thermal runaway defects in the Galaxy E8 model, resulting in underreporting of fire incidents to SAMR. Claims violation of the Consumer Rights Protection Law (消费者权益保护法) Art. 20 and the Product Quality Law Art. 27.",
-    "tags": ["EV battery", "Consumer protection", "信息披露", "公益诉讼"],
+    "summary": "Consumer advocacy organization alleges Geely failed to timely disclose known battery thermal runaway defects in the Galaxy E8 model, resulting in underreporting of fire incidents to the market regulator. Claims violation of the Consumer Rights Protection Law Art. 20 and the Product Quality Law Art. 27.",
+    "tags": ["EV battery", "Consumer protection", "Disclosure failure", "Public interest litigation"],
     "source_url": "",
     "added": "2026-03-01",
     "verified": true
@@ -64,7 +64,7 @@
   },
   {
     "id": "004",
-    "title": "Li Mou v. BYD Auto Co., Ltd. — lemon law claim, range degradation after OTA software update",
+    "title": "Li v. BYD Auto Co., Ltd. — lemon law claim, range degradation after OTA software update",
     "jurisdiction": "CN",
     "court": "Shenzhen Nanshan District People's Court",
     "docket": "",
@@ -74,11 +74,11 @@
     "claim_types": ["Consumer protection", "Lemon law / warranty"],
     "vehicle_type": "EV",
     "parties": {
-      "plaintiff": "Li Mou (李某)",
+      "plaintiff": "Li (consumer plaintiff)",
       "defendant": "BYD Auto Co., Ltd."
     },
-    "summary": "Plaintiff alleged that BYD's OTA update (v2.3.1, released Sep 2025) reduced the Han EV's rated range by 18% without consumer consent or adequate disclosure, constituting a product defect under the Three-Package Rules for Automobiles. Court awarded full refund plus 10% punitive supplement under the Consumer Rights Protection Law Art. 55.",
-    "tags": ["EV", "OTA update", "消费者权益", "三包规定", "Decided"],
+    "summary": "Plaintiff alleged that BYD's OTA update reduced the Han EV's rated range by 18% without consumer consent or adequate disclosure, constituting a product defect under China's Three-Package Rules for Automobiles. Court awarded full refund plus 10% punitive supplement under the Consumer Rights Protection Law Art. 55.",
+    "tags": ["EV", "OTA update", "Consumer rights", "Three-Package Rules", "Decided"],
     "source_url": "",
     "added": "2026-03-01",
     "verified": true
@@ -98,7 +98,7 @@
       "plaintiff": "State of California (AG)",
       "defendant": "Volkswagen Group of America, Inc."
     },
-    "summary": "California AG alleges Volkswagen continued to deploy defeat device logic in MY2022–2024 turbocharged ICE vehicles sold in California, in violation of the state's 2020 consent decree arising from the Dieselgate settlement. Action seeks civil penalties of $37,500 per violation under the California Clean Air Act and Health & Safety Code § 43016.",
+    "summary": "California AG alleges Volkswagen continued to deploy defeat device logic in MY2022-2024 turbocharged ICE vehicles sold in California, in violation of the state's 2020 consent decree arising from the Dieselgate settlement. Action seeks civil penalties of $37,500 per violation under the California Clean Air Act and Health and Safety Code Section 43016.",
     "tags": ["Emissions fraud", "State AG", "ICE vehicle", "Defeat device", "Consent decree"],
     "source_url": "",
     "added": "2026-03-01",
@@ -106,7 +106,7 @@
   },
   {
     "id": "006",
-    "title": "Wang Xiaoming v. NIO, Inc. — sudden unintended acceleration resulting in highway collision",
+    "title": "Wang v. NIO, Inc. — sudden unintended acceleration resulting in highway collision",
     "jurisdiction": "CN",
     "court": "Shanghai No.1 Intermediate People's Court",
     "docket": "",
@@ -116,11 +116,11 @@
     "claim_types": ["Product liability"],
     "vehicle_type": "EV",
     "parties": {
-      "plaintiff": "Wang Xiaoming (王小明)",
+      "plaintiff": "Wang (consumer plaintiff)",
       "defendant": "NIO, Inc."
     },
-    "summary": "Plaintiff alleges NIO's ES8 accelerated uncontrollably at highway speeds due to a software defect in the drive control unit, causing a rear-end collision with personal injury. NIO disputes the characterization and points to driver error data from on-board telemetry. Case involves competing expert testimony on EDR data interpretation.",
-    "tags": ["Product liability", "EV", "软件缺陷", "Personal injury"],
+    "summary": "Plaintiff alleges NIO's ES8 accelerated uncontrollably at highway speeds due to a software defect in the drive control unit, causing a rear-end collision with personal injury. NIO disputes the characterization and points to driver error data from on-board telemetry. Case involves competing expert testimony on event data recorder interpretation.",
+    "tags": ["Product liability", "EV", "Software defect", "Personal injury"],
     "source_url": "",
     "added": "2026-03-01",
     "verified": true
@@ -140,7 +140,7 @@
       "plaintiff": "Rivian Automotive, Inc.",
       "defendant": "Scout Motors Inc."
     },
-    "summary": "Rivian alleges Scout's Terra pickup truck and Traveler SUV designs improperly copy Rivian's distinctive 'stadium lighting' front lamp design and overall vehicle silhouette trade dress, creating consumer confusion in the electric truck market. Motion to dismiss pending; Scout argues trade dress is functional and lacks secondary meaning.",
+    "summary": "Rivian alleges Scout's Terra pickup truck and Traveler SUV designs improperly copy Rivian's distinctive front lamp design and overall vehicle silhouette trade dress, creating consumer confusion in the electric truck market. Motion to dismiss pending; Scout argues trade dress is functional and lacks secondary meaning.",
     "tags": ["IP", "Trade dress", "EV", "Design"],
     "source_url": "",
     "added": "2026-03-01",
@@ -158,11 +158,11 @@
     "claim_types": ["Product liability"],
     "vehicle_type": "EV",
     "parties": {
-      "plaintiff": "Chen (陈某)",
+      "plaintiff": "Chen (consumer plaintiff)",
       "defendant": "SAIC-GM-Wuling Automobile Co., Ltd."
     },
-    "summary": "Plaintiff sustained serious injuries in a frontal collision when airbags failed to deploy in the Hongguang MINI EV at speeds triggering deployment per specifications. Court found product defect under the Product Quality Law Art. 41, ordering compensation of ¥340,000. Defendant has appealed to the Guangxi Higher People's Court.",
-    "tags": ["Product liability", "EV", "Airbag", "产品质量", "On appeal"],
+    "summary": "Plaintiff sustained serious injuries in a frontal collision when airbags failed to deploy in the Hongguang MINI EV at speeds triggering deployment per specifications. Court found product defect under China's Product Quality Law Art. 41, ordering compensation of CNY 340,000. Defendant has appealed to the Guangxi Higher People's Court.",
+    "tags": ["Product liability", "EV", "Airbag failure", "Product Quality Law", "On appeal"],
     "source_url": "",
     "added": "2026-03-01",
     "verified": true
