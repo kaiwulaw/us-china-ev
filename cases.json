@@ -166,5 +166,65 @@
     "source_url": "",
     "added": "2026-03-01",
     "verified": true
-  }
+  },
+   {
+    "id": "009",
+    "title": "Lu Hui v. Mitsubishi Motors Corporation (Japan) et al. – Brake Failure Personal Injury (Trademark Counterfeiting)",
+    "jurisdiction": "CN",
+    "court": "Furong District People's Court, Changsha City, Hunan Province",
+    "docket": "",
+    "filed": "2002-03",
+    "decided": "2022",
+    "status": "Decided – Li Zhiming liable; Mitsubishi dismissed; appeal dismissed, original judgment upheld",
+    "claim_types": ["Product liability", "Personal injury"],
+    "vehicle_type": "ICE",
+    "parties": {
+      "plaintiff": "Lu Hui",
+      "defendant": "Mitsubishi Motors Corporation (Japan); Li Zhiming"
+    },
+    "summary": "On December 25, 2000, defendant Li Zhiming was operating a 'Sanleng' brand SUV in Changsha when the vehicle's rear braking system failed, causing a collision with plaintiff Lu Hui, a pedestrian. Lu Hui sustained a fractured skull, severe traumatic brain injury, and total physical disability (Grade 1). The Hunan Provincial Bureau of Technical Supervision determined that brake oil pipe wear and rupture caused hydraulic fluid loss, resulting in complete brake failure. The subject vehicle was a 'GS Sanleng SKD Jeep' assembled by Hunan Hanshou Vehicle Modification Factory and purchased by Li Zhiming in December 1996. The vehicle bore the Mitsubishi trademark without authorization, having been assembled and distributed without Mitsubishi Motors Corporation's knowledge or consent. Defendant Mitsubishi advanced CNY 120,000 to the treating hospital on humanitarian grounds, expressly disclaiming any admission of liability. Following investigation, Mitsubishi determined the vehicle was not a lawfully imported genuine Mitsubishi product. The court of first instance held that any party affixing its name or trademark to a product is presumed its manufacturer, but that no liability attaches where the mark was applied by a third party through counterfeiting. Finding no evidentiary nexus between the subject vehicle and Mitsubishi Motors Corporation, the court dismissed all claims against Mitsubishi and apportioned liability between Li Zhiming (CNY 383,027) and Lu Hui (residual loss of CNY 547,181 total). Both parties appealed; the Changsha Intermediate People's Court dismissed the appeals and affirmed the judgment in full.",
+    "source_url": "",
+    "added": "2026-03-16",
+    "verified": true
+   },
+  {
+    "id": "010",
+    "title": "Zhang Xuyang v. Shenyang Aokesi Automobile Co., Ltd. et al. – Illegally Produced Vehicle, Rescission of Purchase Contract",
+    "jurisdiction": "CN",
+    "court": Dalian Intermediate People's Court (second instance, settled by mediation)",
+    "docket": "",
+    "filed": "2005",
+    "decided": "2005",
+    "status": "Decided (first instance) – defendants liable; appeal resolved by mediated settlement",
+    "claim_types": ["Product liability", "Contract rescission", "Consumer protection"],
+    "vehicle_type": "ICE",
+    "parties": {
+      "plaintiff": "Zhang Xuyang",
+      "defendant": "Shenyang Aokesi Automobile Co., Ltd.; Ningbo Aokesi Automobile Co., Ltd.; Aokesi Group Co., Ltd.; Shenyang Fusang Heidao Co., Ltd."
+    },
+    "summary": "In March 2005, plaintiff Zhang Xuyang purchased an Aokesi Langjie SUV for CNY 73,800, manufactured by Shenyang Aokesi Automobile Co., Ltd. and distributed by Ningbo Aokesi. Following Aokesi Group's market withdrawal in April 2005, plaintiff discovered that Shenyang Aokesi lacked a lawful vehicle production qualification and had assembled the vehicle under Fusang Heidao's production license without state approval, constituting unlawful vehicle assembly. Plaintiff sought rescission of the purchase contract, full refund, and compensation for registration costs of CNY 10,117.53, asserting joint and several liability against all four defendants on grounds of license lending, trademark lending, and general distributorship. The court of first instance ordered return of the vehicle, refund of the purchase price, and compensation of economic losses, with Fusang Heidao bearing joint and several liability for the monetary obligations. Three defendants appealed to the Dalian Intermediate People's Court; the matter was resolved by judicial mediation.",
+    "source_url": "",
+    "added": "2026-03-16",
+    "verified": true
+   },
+  {
+    "id": "011",
+    "title": "Mr. Cai & Ms. Huang v. DaimlerChrysler et al. – Airbag Non-Deployment and Seatbelt Failure Causing Death (Mercedes-Benz S320)",
+    "jurisdiction": "CN",
+    "court": "Dongguan Intermediate People's Court, Guangdong Province",
+    "docket": "",
+    "filed": "",
+    "decided": "",
+    "status": "Decided – defendants liable",
+    "claim_types": ["Product liability", "Wrongful death", "Emotional distress"],
+    "vehicle_type": "ICE",
+    "parties": {
+      "plaintiff": "Mr. Cai; Ms. Huang",
+      "defendant": "DaimlerChrysler Co., Ltd.; Liang Zhiwei; He Zhiwei"
+    },
+    "summary": "On January 31, 1999, Cai Moupeng, eldest son of the plaintiffs, was killed when his Mercedes-Benz S320 struck a guardrail on the Guangshen Expressway (Humen section), fell into a roadside ditch, and both front airbags failed to deploy while the driver's seatbelt fractured. Traffic authorities confirmed the passive safety system failures. Plaintiffs brought suit in the Dongguan Intermediate People's Court alleging product defect causation, seeking apology, compensation, and litigation costs. DaimlerChrysler denied causation; defendants Liang Zhiwei and He Zhiwei, shareholders of intermediary seller Hong Kong Furong Company, defaulted. The court found a legally cognizable causal nexus between the safety system failures and the decedent's death, ordering all defendants jointly to pay approximately CNY 90,000 in compensatory damages, and DaimlerChrysler to pay each plaintiff CNY 100,000 in emotional distress damages (CNY 200,000 total), with the two seller-defendants bearing joint and several liability.",
+    "source_url": "",
+    "added": "2026-03-16",
+    "verified": true
+   },
 ]
