@@ -363,7 +363,7 @@ fetch('/us-china-ev/cases.json')
     // Main column cases
     var mainHtml = '';
     recent.forEach(function(c) {
-      mainHtml += '<article class="case-row" onclick="window.location.href='/us-china-ev/search.html'">';
+      mainHtml += '<article class="case-row" onclick="window.location.href=\'/us-china-ev/search.html\'">';
       mainHtml += '<div class="case-top"><div class="case-title">' + c.title + '</div>';
       mainHtml += '<span class="jbadge ' + badgeClass(c.jurisdiction) + '">' + badgeLabel(c.jurisdiction) + '</span></div>';
       mainHtml += '<div class="case-sub">' + c.court + (c.filed ? ' &nbsp;·&nbsp; Filed ' + formatDate(c.filed) : '') + (c.status ? ' &nbsp;·&nbsp; ' + c.status : '') + '</div>';
@@ -377,7 +377,7 @@ fetch('/us-china-ev/cases.json')
     var asideHtml = '';
     sorted.forEach(function(c) {
       var isNew = c.added >= '2026-03-01';
-      asideHtml += '<div class="lcase" onclick="window.location.href='/us-china-ev/search.html'">';
+      asideHtml += '<div class="lcase" onclick="window.location.href=\'/us-china-ev/search.html\'">';
       asideHtml += '<div class="lc-top"><div class="lc-title">' + c.title + '</div>';
       if (isNew) asideHtml += '<div class="new-dot" title="New this month"></div>';
       asideHtml += '</div>';
