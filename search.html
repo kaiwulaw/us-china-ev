@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Cases — US-China Automotive Litigation Database</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--ink:#1a1a18;--ink-mid:#4a4a46;--ink-light:#8a8a84;--ink-faint:#d4d4cc;--surface:#ffffff;--surface-off:#f8f7f4;--accent:#1a3a6b;--accent-light:#e8eef7;--cn:#8b1a1a;--cn-light:#f7eaea;--both:#3c2a7a;--both-light:#f0eef8;--border:#e8e8e0;--green:#2a7a4a;--green-light:#eaf3ee}
+    body{font-family:'DM Sans',sans-serif;color:var(--ink);background:var(--surface-off);font-size:14px;line-height:1.6}
+    a{text-decoration:none;color:inherit}
+    .site{max-width:1100px;margin:0 auto;background:var(--surface);border-left:1px solid var(--border);border-right:1px solid var(--border);min-height:100vh}
+    .nav{height:56px;display:flex;align-items:center;padding:0 40px;border-bottom:1px solid var(--border);background:var(--surface);gap:32px;position:sticky;top:0;z-index:200}
+    .nav-logo{font-family:'Lora',serif;font-size:15px;font-weight:400;color:var(--ink);white-space:nowrap;flex-shrink:0}
+    .nav-logo b{font-weight:500}
+    .nav-spacer{flex:1}
+    .nav-link{font-size:13px;color:var(--ink-mid);cursor:pointer;white-space:nowrap;transition:color .15s}
+    .nav-link:hover,.nav-link.active{color:var(--ink)}
+    .nav-link.active{font-weight:500}
+    .nav-btn{font-size:12px;padding:6px 14px;border:1px solid var(--border);border-radius:6px;color:var(--ink-mid);background:var(--surface);cursor:pointer;font-family:'DM Sans',sans-serif}
+    .search-header{padding:36px 40px 28px;border-bottom:1px solid var(--border);background:var(--surface)}
+    .search-header h1{font-family:'Lora',serif;font-size:24px;font-weight:400;color:var(--ink);margin-bottom:16px;letter-spacing:-.3px}
+    .main-search-row{display:flex;max-width:660px;border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:border-color .15s;margin-bottom:14px}
+    .main-search-row:focus-within{border-color:var(--accent)}
+    .main-search-row input{flex:1;height:44px;border:none;padding:0 16px;font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);background:transparent;outline:none}
+    .main-search-row input::placeholder{color:var(--ink-light)}
+    .mode-toggle{display:flex;border-left:1px solid var(--border)}
+    .mt-btn{height:44px;padding:0 14px;border:none;background:transparent;font-size:12px;color:var(--ink-light);cursor:pointer;font-family:'DM Sans',sans-serif;border-right:1px solid var(--border);transition:background .15s,color .15s}
+    .mt-btn:last-child{border-right:none}
+    .mt-btn.active{background:var(--surface-off);color:var(--ink);font-weight:500}
+    .search-submit{height:44px;padding:0 22px;background:var(--accent);color:#fff;border:none;font-size:13px;cursor:pointer;font-family:'DM Sans',sans-serif}
+    .search-submit:hover{background:#142d55}
+    .active-filters{display:flex;gap:6px;flex-wrap:wrap;align-items:center;min-height:28px}
+    .af-label{font-size:11px;color:var(--ink-light);font-family:'DM Mono',monospace}
+    .filter-pill{display:flex;align-items:center;gap:5px;font-size:11px;padding:3px 9px;border-radius:20px;background:var(--accent-light);color:var(--accent);border:1px solid #c4d4eb;cursor:pointer}
+    .filter-pill .remove{font-size:13px;line-height:1;opacity:.6}
+    .filter-pill:hover .remove{opacity:1}
+    .clear-all{font-size:11px;color:var(--ink-light);cursor:pointer;margin-left:4px;text-decoration:underline}
+    .results-toolbar{display:flex;align-items:center;justify-content:space-between;padding:12px 40px 12px 260px;border-bottom:1px solid var(--border);background:var(--surface-off)}
+    .results-count{font-size:13px;color:var(--ink-mid)}
+    .results-count strong{color:var(--ink);font-weight:500}
+    .toolbar-right{display:flex;gap:8px;align-items:center}
+    .sort-select{height:32px;padding:0 10px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--ink-mid);background:var(--surface);cursor:pointer;outline:none}
+    .export-btn{height:32px;padding:0 14px;border:1px solid var(--border);border-radius:6px;font-size:12px;font-family:'DM Sans',sans-serif;color:var(--ink-mid);background:var(--surface);cursor:pointer}
+    .export-btn:hover{border-color:var(--ink-faint);color:var(--ink)}
+    .search-body{display:grid;grid-template-columns:220px 1fr;align-items:start}
+    .filter-sidebar{padding:24px 0 40px;border-right:1px solid var(--border);background:var(--surface);position:sticky;top:56px;max-height:calc(100vh - 56px);overflow-y:auto}
+    .filter-sidebar::-webkit-scrollbar{width:4px}
+    .filter-sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+    .filter-group{padding:0 20px 20px;border-bottom:1px solid var(--border)}
+    .filter-group:last-child{border-bottom:none}
+    .fg-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding-top:18px;cursor:pointer}
+    .fg-label{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-light);letter-spacing:.6px;text-transform:uppercase}
+    .fg-toggle{font-size:14px;color:var(--ink-light);line-height:1}
+    .filter-option{display:flex;align-items:center;gap:8px;padding:4px 0;cursor:pointer}
+    .filter-option input[type=checkbox]{width:14px;height:14px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+    .filter-option label{font-size:12px;color:var(--ink);cursor:pointer;flex:1}
+    .filter-option:hover label{color:var(--accent)}
+    .f-count{font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-light);margin-left:auto}
+    .date-inputs{display:flex;gap:6px;align-items:center;margin-top:4px}
+    .date-inputs input{flex:1;height:30px;border:1px solid var(--border);border-radius:5px;padding:0 8px;font-size:11px;font-family:'DM Mono',monospace;color:var(--ink);background:var(--surface);outline:none}
+    .date-inputs input:focus{border-color:var(--accent)}
+    .date-sep{font-size:11px;color:var(--ink-light)}
+    .results-pane{padding:0 40px 48px 32px}
+    .case-card{padding:20px 0;border-bottom:1px solid var(--border);cursor:pointer}
+    .case-card:last-child{border-bottom:none}
+    .case-card:hover .cc-title{color:var(--accent)}
+    .cc-top{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+    .cc-title{font-size:15px;font-weight:500;color:var(--ink);line-height:1.4;flex:1;transition:color .15s}
+    .jbadge{font-size:10px;padding:2px 8px;border-radius:3px;white-space:nowrap;flex-shrink:0;font-family:'DM Mono',monospace;letter-spacing:.2px;margin-top:3px}
+    .j-us{background:var(--accent-light);color:var(--accent)}
+    .j-cn{background:var(--cn-light);color:var(--cn)}
+    .j-both{background:var(--both-light);color:var(--both)}
+    .cc-meta{display:flex;gap:16px;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+    .cc-meta-item{font-size:11px;color:var(--ink-light);font-family:'DM Mono',monospace}
+    .cc-meta-item span{color:var(--ink-mid)}
+    .status-pill{font-size:10px;padding:2px 8px;border-radius:3px;font-family:'DM Mono',monospace}
+    .sp-pending{background:#faeeda;color:#633806}
+    .sp-decided{background:var(--green-light);color:#1a5c30}
+    .sp-settled{background:#eeedfe;color:#3c2a7a}
+    .sp-dismissed{background:var(--surface-off);color:var(--ink-light);border:1px solid var(--border)}
+    .sp-appeal{background:#fff3e0;color:#7a4400}
+    .cc-summary{font-size:13px;color:var(--ink-mid);line-height:1.65;margin-bottom:10px;max-width:680px}
+    .cc-summary mark{background:#fef9c3;color:var(--ink);border-radius:2px;padding:0 2px}
+    .cc-tags{display:flex;gap:5px;flex-wrap:wrap}
+    .ctag{font-size:11px;padding:2px 8px;border-radius:3px;background:var(--surface-off);color:var(--ink-mid);border:1px solid var(--border)}
+    .no-results{padding:60px 0;text-align:center}
+    .no-results h3{font-family:'Lora',serif;font-size:20px;font-weight:400;color:var(--ink);margin-bottom:8px}
+    .no-results p{font-size:13px;color:var(--ink-light)}
+    .footer{padding:24px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--border)}
+    .footer-left{font-size:11px;color:var(--ink-light);line-height:1.75}
+    .footer-links{display:flex;gap:20px}
+    .footer-links a{font-size:11px;color:var(--ink-light);transition:color .15s}
+    .footer-links a:hover{color:var(--ink-mid)}
+    .disclaimer{padding:14px 40px;background:var(--surface-off);border-top:1px solid var(--border);font-size:11px;color:var(--ink-light);line-height:1.6;text-align:center}
+    @media(max-width:800px){.nav{padding:0 20px;gap:16px}.nav-link{display:none}.search-header{padding:24px 20px 20px}.search-body{grid-template-columns:1fr}.filter-sidebar{position:static;max-height:none;border-right:none;border-bottom:1px solid var(--border)}.results-toolbar{padding-left:20px}.results-pane{padding:0 20px 40px}.footer{flex-direction:column;gap:16px;padding:24px 20px}}
+  </style>
+</head>
+<body>
+<div class="site">
+  <nav class="nav">
+    <a class="nav-logo" href="/us-china-ev/index.html"><b>US-China</b> Automotive Litigation Database</a>
+    <div class="nav-spacer"></div>
+    <a class="nav-link active" href="/us-china-ev/search.html">Search</a>
+    <a class="nav-link" href="/us-china-ev/about.html">About</a>
+    <a class="nav-link" href="#">Methodology</a>
+    <a class="nav-link" href="#">FAQs</a>
+    <a class="nav-link" href="#">Data download</a>
+    <button class="nav-btn">Subscribe →</button>
+  </nav>
+  <div class="search-header">
+    <h1>Search the database</h1>
+    <div class="main-search-row">
+      <input type="text" id="main-search" placeholder="Search by case name, court, party, keyword, claim type…" aria-label="Search cases">
+      <div class="mode-toggle">
+        <button class="mt-btn active" onclick="setMode('broad',this)">Broad</button>
+        <button class="mt-btn" onclick="setMode('exact',this)">Exact</button>
+      </div>
+      <button class="search-submit" onclick="renderResults()">Search</button>
+    </div>
+    <div class="active-filters" id="active-filters">
+      <span class="af-label">Filters:</span>
+      <span style="font-size:11px;color:var(--ink-light)">None applied</span>
+    </div>
+  </div>
+  <div class="results-toolbar">
+    <div class="results-count" id="results-count"><strong>—</strong> cases</div>
+    <div class="toolbar-right">
+      <button class="export-btn" onclick="exportCSV()">Export CSV ↓</button>
+      <select class="sort-select" id="sort-select" onchange="renderResults()">
+        <option value="date-desc">Date: newest first</option>
+        <option value="date-asc">Date: oldest first</option>
+        <option value="alpha">Case name A–Z</option>
+      </select>
+    </div>
+  </div>
+  <div class="search-body">
+    <aside class="filter-sidebar">
+      <div class="filter-group">
+        <div class="fg-header" onclick="toggleGroup('jur')"><span class="fg-label">Jurisdiction</span><span class="fg-toggle" id="tog-jur">−</span></div>
+        <div id="grp-jur">
+          <div class="filter-option"><input type="checkbox" id="f-us" onchange="renderResults()"><label for="f-us">U.S. cases</label><span class="f-count" id="cnt-us">0</span></div>
+          <div class="filter-option"><input type="checkbox" id="f-cn" onchange="renderResults()"><label for="f-cn">Chinese cases</label><span class="f-count" id="cnt-cn">0</span></div>
+          <div class="filter-option"><input type="checkbox" id="f-both" onchange="renderResults()"><label for="f-both">Cross-border</label><span class="f-count" id="cnt-both">0</span></div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="fg-header" onclick="toggleGroup('status')"><span class="fg-label">Case status</span><span class="fg-toggle" id="tog-status">−</span></div>
+        <div id="grp-status">
+          <div class="filter-option"><input type="checkbox" id="f-pending" onchange="renderResults()"><label for="f-pending">Pending</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-decided" onchange="renderResults()"><label for="f-decided">Decided</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-settled" onchange="renderResults()"><label for="f-settled">Settled</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-dismissed" onchange="renderResults()"><label for="f-dismissed">Dismissed</label></div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="fg-header" onclick="toggleGroup('claim')"><span class="fg-label">Claim type</span><span class="fg-toggle" id="tog-claim">−</span></div>
+        <div id="grp-claim">
+          <div class="filter-option"><input type="checkbox" id="f-prodliab" data-claim="Product liability" onchange="renderResults()"><label for="f-prodliab">Product liability</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-consumer" data-claim="Consumer protection" onchange="renderResults()"><label for="f-consumer">Consumer protection</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-emissions" data-claim="Emissions / fraud" onchange="renderResults()"><label for="f-emissions">Emissions / fraud</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-ip" data-claim="Patent / IP" onchange="renderResults()"><label for="f-ip">Patent / IP</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-trade" data-claim="Trade secret" onchange="renderResults()"><label for="f-trade">Trade secret</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-av" data-claim="Autonomous vehicle" onchange="renderResults()"><label for="f-av">Autonomous vehicle</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-lemon" data-claim="Lemon law / warranty" onchange="renderResults()"><label for="f-lemon">Lemon law / warranty</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-enviro" data-claim="Environmental / regulatory" onchange="renderResults()"><label for="f-enviro">Environmental / regulatory</label></div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="fg-header" onclick="toggleGroup('vehicle')"><span class="fg-label">Vehicle type</span><span class="fg-toggle" id="tog-vehicle">−</span></div>
+        <div id="grp-vehicle">
+          <div class="filter-option"><input type="checkbox" id="f-ev" data-vtype="EV" onchange="renderResults()"><label for="f-ev">Electric vehicle (EV)</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-ice" data-vtype="ICE" onchange="renderResults()"><label for="f-ice">ICE / conventional</label></div>
+          <div class="filter-option"><input type="checkbox" id="f-hybrid" data-vtype="Hybrid" onchange="renderResults()"><label for="f-hybrid">Hybrid / PHEV</label></div>
+        </div>
+      </div>
+      <div class="filter-group">
+        <div class="fg-header" onclick="toggleGroup('date')"><span class="fg-label">Filing year</span><span class="fg-toggle" id="tog-date">−</span></div>
+        <div id="grp-date">
+          <div class="date-inputs">
+            <input type="text" id="date-from" placeholder="2010" maxlength="4" oninput="renderResults()">
+            <span class="date-sep">—</span>
+            <input type="text" id="date-to" placeholder="2026" maxlength="4" oninput="renderResults()">
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="results-pane">
+      <div id="results-list"><p style="font-size:12px;color:var(--ink-light);padding:24px 0;font-family:'DM Mono',monospace">Loading cases…</p></div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer-left">© 2026 University of Denver Sturm College of Law<br>US-China Automotive Litigation Database</div>
+    <div class="footer-links">
+      <a href="/us-china-ev/index.html">Home</a>
+      <a href="/us-china-ev/search.html">Search</a>
+      <a href="/us-china-ev/about.html">About</a>
+      <a href="#">Methodology</a>
+      <a href="#">FAQs</a>
+      <a href="#">Data download</a>
+      <a href="#">Terms of use</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+  <div class="disclaimer">The materials on this website are intended to provide a general summary of the law and do not constitute legal advice. You should consult with counsel to determine applicable legal requirements in a specific fact situation.</div>
+</div>
+<script>
+var allCases=[];var searchMode='broad';
+function setMode(m,el){searchMode=m;document.querySelectorAll('.mt-btn').forEach(function(b){b.classList.remove('active')});el.classList.add('active');renderResults()}
+function toggleGroup(id){var g=document.getElementById('grp-'+id);var t=document.getElementById('tog-'+id);if(!g)return;var h=g.style.display==='none';g.style.display=h?'block':'none';t.textContent=h?'−':'+'}
+function badgeClass(j){return j==='US'?'j-us':j==='CN'?'j-cn':'j-both'}
+function badgeLabel(j){return j==='US'?'U.S.':j==='CN'?'China':'US + CN'}
+function formatDate(d){if(!d)return'';var p=d.split('-');var m=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];return m[parseInt(p[1])-1]+' '+parseInt(p[2])+', '+p[0]}
+function statusPillClass(s){if(!s)return'sp-pending';var sl=s.toLowerCase();if(sl.indexOf('settled')>=0||sl.indexOf('settlement')>=0)return'sp-settled';if(sl.indexOf('decided')>=0||sl.indexOf('awarded')>=0||sl.indexOf('liable')>=0)return'sp-decided';if(sl.indexOf('dismissed')>=0)return'sp-dismissed';if(sl.indexOf('appeal')>=0)return'sp-appeal';return'sp-pending'}
+function highlight(text,q){if(!q||q.length<2)return text;var e=q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');return text.replace(new RegExp('('+e+')','gi'),'<mark>$1</mark>')}
+function getFiltered(){
+  var q=document.getElementById('main-search').value.trim().toLowerCase();
+  var jurUS=document.getElementById('f-us').checked;
+  var jurCN=document.getElementById('f-cn').checked;
+  var jurBoth=document.getElementById('f-both').checked;
+  var jurAny=jurUS||jurCN||jurBoth;
+  var statuses=[];
+  if(document.getElementById('f-pending').checked)statuses.push('pending');
+  if(document.getElementById('f-decided').checked)statuses.push('decided');
+  if(document.getElementById('f-settled').checked)statuses.push('settled');
+  if(document.getElementById('f-dismissed').checked)statuses.push('dismissed');
+  var claimBoxes=document.querySelectorAll('[data-claim]:checked');
+  var selClaims=Array.from(claimBoxes).map(function(b){return b.getAttribute('data-claim').toLowerCase()});
+  var vtypeBoxes=document.querySelectorAll('[data-vtype]:checked');
+  var selVtypes=Array.from(vtypeBoxes).map(function(b){return b.getAttribute('data-vtype').toLowerCase()});
+  var yFrom=parseInt(document.getElementById('date-from').value)||0;
+  var yTo=parseInt(document.getElementById('date-to').value)||9999;
+  return allCases.filter(function(c){
+    if(jurAny){if(c.jurisdiction==='US'&&!jurUS)return false;if(c.jurisdiction==='CN'&&!jurCN)return false;if(c.jurisdiction==='BOTH'&&!jurBoth)return false}
+    if(statuses.length>0){var sl=(c.status||'').toLowerCase();if(!statuses.some(function(s){return sl.indexOf(s)>=0}))return false}
+    if(selClaims.length>0){var cl=(c.claim_types||[]).map(function(x){return x.toLowerCase()});if(!selClaims.every(function(sc){return cl.some(function(x){return x.indexOf(sc)>=0})}))return false}
+    if(selVtypes.length>0){var vt=(c.vehicle_type||'').toLowerCase();if(!selVtypes.some(function(sv){return vt.indexOf(sv)>=0}))return false}
+    if(c.filed){var yr=parseInt(c.filed.split('-')[0]);if(yr<yFrom||yr>yTo)return false}
+    if(q){var s=[c.title,c.court,c.summary,c.docket,(c.parties&&c.parties.plaintiff)||'',(c.parties&&c.parties.defendant)||'',(c.tags||[]).join(' '),(c.claim_types||[]).join(' ')].join(' ').toLowerCase();if(searchMode==='exact'){if(s.indexOf(q)<0)return false}else{if(!q.split(/\s+/).every(function(w){return s.indexOf(w)>=0}))return false}}
+    return true
+  })
+}
+function renderResults(){
+  var filtered=getFiltered();
+  var sort=document.getElementById('sort-select').value;
+  var query=document.getElementById('main-search').value.trim();
+  filtered.sort(function(a,b){if(sort==='date-asc')return(a.filed||'').localeCompare(b.filed||'');if(sort==='alpha')return a.title.localeCompare(b.title);return(b.filed||'').localeCompare(a.filed||'')});
+  document.getElementById('results-count').innerHTML='<strong>'+filtered.length+'</strong> case'+(filtered.length!==1?'s':'')+(query?' matching <strong>"'+query+'"</strong>':' · all jurisdictions');
+  renderFilterPills();
+  if(filtered.length===0){document.getElementById('results-list').innerHTML='<div class="no-results"><h3>No cases found</h3><p>Try broadening your search or removing some filters.</p></div>';return}
+  var html='';
+  filtered.forEach(function(c){
+    var sum=c.summary||'';if(query)sum=highlight(sum,query);
+    var ttl=c.title;if(query)ttl=highlight(ttl,query);
+    html+='<article class="case-card">';
+    html+='<div class="cc-top"><div class="cc-title">'+ttl+'</div><span class="jbadge '+badgeClass(c.jurisdiction)+'">'+badgeLabel(c.jurisdiction)+'</span></div>';
+    html+='<div class="cc-meta">';
+    if(c.court)html+='<span class="cc-meta-item">Court: <span>'+c.court+'</span></span>';
+    if(c.filed)html+='<span class="cc-meta-item">Filed: <span>'+formatDate(c.filed)+'</span></span>';
+    if(c.docket)html+='<span class="cc-meta-item">Docket: <span>'+c.docket+'</span></span>';
+    if(c.status)html+='<span class="status-pill '+statusPillClass(c.status)+'">'+c.status+'</span>';
+    html+='</div>';
+    if(sum)html+='<p class="cc-summary">'+sum+'</p>';
+    html+='<div class="cc-tags">';
+    (c.tags||[]).forEach(function(t){html+='<span class="ctag">'+t+'</span>'});
+    html+='</div></article>'
+  });
+  document.getElementById('results-list').innerHTML=html
+}
+function renderFilterPills(){
+  var pills=[];
+  document.querySelectorAll('.filter-sidebar input[type=checkbox]:checked').forEach(function(cb){var l=document.querySelector('label[for="'+cb.id+'"]');if(l)pills.push({id:cb.id,label:l.textContent.trim()})});
+  var af=document.getElementById('active-filters');
+  if(pills.length===0){af.innerHTML='<span class="af-label">Filters:</span><span style="font-size:11px;color:var(--ink-light)">None applied</span>'}
+  else{var h='<span class="af-label">Filters:</span>';pills.forEach(function(p){h+='<span class="filter-pill" onclick="clearFilter(\''+p.id+'\')">'+p.label+'<span class="remove">×</span></span>'});h+='<span class="clear-all" onclick="clearAllFilters()">Clear all</span>';af.innerHTML=h}
+}
+function clearFilter(id){var cb=document.getElementById(id);if(cb){cb.checked=false;renderResults()}}
+function clearAllFilters(){document.querySelectorAll('.filter-sidebar input[type=checkbox]').forEach(function(cb){cb.checked=false});renderResults()}
+function exportCSV(){
+  var filtered=getFiltered();
+  var rows=[['ID','Title','Jurisdiction','Court','Docket','Filed','Decided','Status','Claim Types','Vehicle Type','Plaintiff','Defendant','Tags','Source URL']];
+  filtered.forEach(function(c){rows.push([c.id,c.title,c.jurisdiction,c.court,c.docket||'',c.filed||'',c.decided||'',c.status,(c.claim_types||[]).join('; '),c.vehicle_type,(c.parties&&c.parties.plaintiff)||'',(c.parties&&c.parties.defendant)||'',(c.tags||[]).join('; '),c.source_url||''])});
+  var csv=rows.map(function(r){return r.map(function(v){return'"'+String(v).replace(/"/g,'""')+'"'}).join(',')}).join('\n');
+  var blob=new Blob([csv],{type:'text/csv'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download='us-china-auto-litdb-export.csv';a.click();URL.revokeObjectURL(url)
+}
+document.getElementById('main-search').addEventListener('keydown',function(e){if(e.key==='Enter')renderResults()});
+var urlParams=new URLSearchParams(window.location.search);var initQ=urlParams.get('q')||'';if(initQ)document.getElementById('main-search').value=initQ;
+fetch('/us-china-ev/cases.json').then(function(r){return r.json()}).then(function(data){
+  allCases=data;
+  document.getElementById('cnt-us').textContent=data.filter(function(c){return c.jurisdiction==='US'}).length;
+  document.getElementById('cnt-cn').textContent=data.filter(function(c){return c.jurisdiction==='CN'}).length;
+  document.getElementById('cnt-both').textContent=data.filter(function(c){return c.jurisdiction==='BOTH'}).length;
+  renderResults()
+}).catch(function(){document.getElementById('results-list').innerHTML='<p style="font-size:12px;color:var(--ink-light);padding:24px 0">Could not load cases.json. Make sure it is in the same folder as this file.</p>'});
+</script>
+</body>
+</html>

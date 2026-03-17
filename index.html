@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>US-China Automotive Litigation Database</title>
+  <meta name="description" content="The first open-access database tracking automobile litigation across U.S. federal and state courts and Chinese people's courts.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:#1a1a18; --ink-mid:#4a4a46; --ink-light:#8a8a84; --ink-faint:#d4d4cc;
+      --surface:#ffffff; --surface-off:#f8f7f4;
+      --accent:#1a3a6b; --accent-light:#e8eef7;
+      --cn:#8b1a1a; --cn-light:#f7eaea;
+      --both:#3c2a7a; --both-light:#f0eef8;
+      --border:#e8e8e0; --green:#2a7a4a;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'DM Sans',sans-serif; color:var(--ink); background:var(--surface-off); font-size:14px; line-height:1.6; }
+    a { text-decoration:none; color:inherit; }
+    .site { max-width:1100px; margin:0 auto; background:var(--surface); border-left:1px solid var(--border); border-right:1px solid var(--border); min-height:100vh; }
+
+    /* Nav */
+    .nav { height:56px; display:flex; align-items:center; padding:0 40px; border-bottom:1px solid var(--border); background:var(--surface); gap:32px; position:sticky; top:0; z-index:100; }
+    .nav-logo { font-family:'Lora',serif; font-size:15px; font-weight:400; color:var(--ink); white-space:nowrap; flex-shrink:0; }
+    .nav-logo b { font-weight:500; }
+    .nav-spacer { flex:1; }
+    .nav-link { font-size:13px; color:var(--ink-mid); cursor:pointer; white-space:nowrap; transition:color 0.15s; }
+    .nav-link:hover { color:var(--ink); }
+    .nav-btn { font-size:12px; padding:6px 14px; border:1px solid var(--border); border-radius:6px; color:var(--ink-mid); background:var(--surface); cursor:pointer; font-family:'DM Sans',sans-serif; }
+    .nav-btn:hover { border-color:var(--ink-faint); color:var(--ink); }
+
+    /* Hero */
+    .hero { padding:72px 40px 56px; border-bottom:1px solid var(--border); }
+    .hero-label { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-light); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:20px; }
+    .hero-title { font-family:'Lora',serif; font-size:38px; font-weight:400; line-height:1.2; color:var(--ink); letter-spacing:-0.5px; margin-bottom:18px; max-width:600px; }
+    .hero-title em { font-style:italic; color:var(--accent); }
+    .hero-body { font-size:14px; color:var(--ink-mid); line-height:1.75; max-width:520px; margin-bottom:36px; }
+    .search-row { display:flex; max-width:540px; margin-bottom:24px; border:1px solid var(--border); border-radius:8px; overflow:hidden; transition:border-color 0.15s; }
+    .search-row:focus-within { border-color:var(--accent); }
+    .search-row input { flex:1; height:44px; border:none; padding:0 16px; font-size:13px; font-family:'DM Sans',sans-serif; color:var(--ink); background:var(--surface); outline:none; }
+    .search-row input::placeholder { color:var(--ink-light); }
+    .search-btn { height:44px; padding:0 22px; background:var(--accent); color:#fff; border:none; font-size:13px; cursor:pointer; font-family:'DM Sans',sans-serif; transition:background 0.15s; }
+    .search-btn:hover { background:#142d55; }
+    .browse-row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+    .browse-label { font-size:12px; color:var(--ink-light); margin-right:2px; }
+    .btag { font-size:12px; padding:4px 12px; border:1px solid var(--border); border-radius:20px; color:var(--ink-mid); cursor:pointer; transition:all 0.15s; }
+    .btag:hover { border-color:var(--ink-faint); color:var(--ink); }
+
+    /* Stats */
+    .stats-row { display:grid; grid-template-columns:repeat(4,1fr); border-bottom:1px solid var(--border); }
+    .stat-cell { padding:24px 40px; border-right:1px solid var(--border); }
+    .stat-cell:last-child { border-right:none; }
+    .stat-n { font-family:'Lora',serif; font-size:28px; color:var(--ink); margin-bottom:4px; }
+    .stat-new { font-size:10px; color:var(--green); font-family:'DM Mono',monospace; margin-left:6px; }
+    .stat-l { font-size:12px; color:var(--ink-light); }
+
+    /* Body */
+    .body-grid { display:grid; grid-template-columns:1fr 320px; }
+    .main-col { padding:48px 40px; border-right:1px solid var(--border); }
+    .aside-col { background:var(--surface-off); }
+    .sec-head { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-light); letter-spacing:0.8px; text-transform:uppercase; margin-bottom:20px; display:flex; justify-content:space-between; align-items:center; }
+    .sec-more { color:var(--accent); cursor:pointer; letter-spacing:0; font-size:10px; transition:opacity 0.15s; }
+    .sec-more:hover { opacity:0.7; }
+    .about-text { font-size:13px; color:var(--ink-mid); line-height:1.75; max-width:560px; margin-bottom:36px; }
+
+    /* Case rows */
+    .case-row { padding:18px 0; border-bottom:1px solid var(--border); cursor:pointer; }
+    .case-row:last-of-type { border-bottom:none; }
+    .case-row:hover .case-title { color:var(--accent); }
+    .case-top { display:flex; align-items:flex-start; gap:10px; margin-bottom:6px; }
+    .case-title { font-size:14px; font-weight:500; color:var(--ink); line-height:1.4; flex:1; transition:color 0.15s; }
+    .jbadge { font-size:10px; padding:2px 8px; border-radius:3px; white-space:nowrap; flex-shrink:0; font-family:'DM Mono',monospace; letter-spacing:0.2px; margin-top:2px; }
+    .j-us   { background:var(--accent-light); color:var(--accent); }
+    .j-cn   { background:var(--cn-light);     color:var(--cn); }
+    .j-both { background:var(--both-light);   color:var(--both); }
+    .case-sub { font-size:11px; color:var(--ink-light); font-family:'DM Mono',monospace; margin-bottom:8px; }
+    .case-tags { display:flex; gap:5px; flex-wrap:wrap; }
+    .ctag { font-size:11px; padding:2px 8px; border-radius:3px; background:var(--surface); color:var(--ink-mid); border:1px solid var(--border); }
+
+    /* Breakdown */
+    .split-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:36px; }
+    .split-box { padding:16px 18px; border:1px solid var(--border); border-radius:8px; background:var(--surface); }
+    .split-flag { font-size:10px; font-family:'DM Mono',monospace; color:var(--ink-light); letter-spacing:0.5px; margin-bottom:12px; display:flex; align-items:center; gap:6px; }
+    .fbar { width:14px; height:3px; border-radius:1px; }
+    .sline { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid var(--border); }
+    .sline:last-child { border-bottom:none; }
+    .sk { font-size:11px; color:var(--ink-mid); }
+    .sv { font-size:11px; font-family:'DM Mono',monospace; color:var(--ink); }
+
+    /* Aside */
+    .aside-top { padding:28px 24px 22px; border-bottom:1px solid var(--border); }
+    .aside-top h3 { font-family:'Lora',serif; font-size:16px; font-weight:400; color:var(--ink); margin-bottom:8px; }
+    .aside-top p { font-size:12px; color:var(--ink-mid); line-height:1.65; margin-bottom:10px; }
+    .aside-link { font-size:12px; color:var(--accent); cursor:pointer; }
+    .latest-head { padding:22px 24px 0; }
+    .latest-scroll { padding:0 24px 8px; }
+    .lcase { padding:14px 0; border-bottom:1px solid var(--border); cursor:pointer; }
+    .lcase:last-child { border-bottom:none; }
+    .lcase:hover .lc-title { color:var(--accent); }
+    .lc-top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; margin-bottom:5px; }
+    .lc-title { font-size:12px; font-weight:500; color:var(--ink); line-height:1.4; flex:1; transition:color 0.15s; }
+    .new-dot { width:6px; height:6px; border-radius:50%; background:var(--green); flex-shrink:0; margin-top:4px; }
+    .lc-meta { font-size:10px; font-family:'DM Mono',monospace; color:var(--ink-light); margin-bottom:6px; }
+    .lc-tags { display:flex; gap:4px; flex-wrap:wrap; align-items:center; }
+    .lctag { font-size:10px; padding:1px 6px; border-radius:3px; background:var(--surface); border:1px solid var(--border); color:var(--ink-mid); }
+
+    /* Map */
+    .aside-map { padding:20px 24px; border-top:1px solid var(--border); }
+    .map-box { border:1px solid var(--border); border-radius:6px; height:140px; background:var(--surface); position:relative; overflow:hidden; margin-bottom:10px; display:flex; align-items:center; justify-content:center; }
+    .map-caption { position:absolute; bottom:8px; left:12px; font-size:10px; font-family:'DM Mono',monospace; color:var(--ink-light); }
+    .mdot { width:7px; height:7px; border-radius:50%; position:absolute; border:1.5px solid #fff; }
+    .map-legend { display:flex; gap:14px; }
+    .leg { display:flex; align-items:center; gap:5px; font-size:10px; color:var(--ink-light); }
+    .ldot { width:7px; height:7px; border-radius:50%; }
+
+    /* Newsletter */
+    .nl-band { padding:52px 40px; background:var(--surface-off); border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:40px; }
+    .nl-left h2 { font-family:'Lora',serif; font-size:20px; font-weight:400; color:var(--ink); margin-bottom:8px; }
+    .nl-left p { font-size:13px; color:var(--ink-mid); max-width:400px; line-height:1.65; }
+    .nl-form { display:flex; border:1px solid var(--border); border-radius:8px; overflow:hidden; background:var(--surface); flex-shrink:0; }
+    .nl-form:focus-within { border-color:var(--accent); }
+    .nl-form input { width:220px; height:42px; border:none; padding:0 16px; font-size:13px; font-family:'DM Sans',sans-serif; color:var(--ink); background:transparent; outline:none; }
+    .nl-form input::placeholder { color:var(--ink-light); }
+    .nl-form button { height:42px; padding:0 18px; background:var(--ink); color:#fff; border:none; font-size:12px; cursor:pointer; font-family:'DM Sans',sans-serif; }
+    .nl-form button:hover { background:#2a2a26; }
+
+    /* Footer */
+    .footer { padding:28px 40px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); }
+    .footer-left { font-size:11px; color:var(--ink-light); line-height:1.75; }
+    .footer-links { display:flex; gap:20px; }
+    .footer-links a { font-size:11px; color:var(--ink-light); transition:color 0.15s; }
+    .footer-links a:hover { color:var(--ink-mid); }
+    .disclaimer { padding:16px 40px; background:var(--surface-off); border-top:1px solid var(--border); font-size:11px; color:var(--ink-light); line-height:1.6; text-align:center; }
+
+    /* Loading state */
+    .loading-msg { font-size:12px; color:var(--ink-light); font-family:'DM Mono',monospace; padding:20px 0; }
+
+    @media (max-width:800px) {
+      .nav { padding:0 20px; gap:16px; }
+      .nav-link { display:none; }
+      .hero { padding:48px 20px 40px; }
+      .hero-title { font-size:28px; }
+      .stats-row { grid-template-columns:repeat(2,1fr); }
+      .stat-cell { padding:18px 20px; }
+      .body-grid { grid-template-columns:1fr; }
+      .aside-col { border-top:1px solid var(--border); }
+      .main-col { padding:32px 20px; border-right:none; }
+      .split-row { grid-template-columns:1fr; }
+      .nl-band { flex-direction:column; padding:36px 20px; }
+      .nl-form { width:100%; }
+      .nl-form input { flex:1; width:auto; }
+      .footer { flex-direction:column; gap:16px; padding:24px 20px; }
+      .footer-links { flex-wrap:wrap; justify-content:center; }
+    }
+  </style>
+</head>
+<body>
+<div class="site">
+
+  <nav class="nav">
+    <a class="nav-logo" href="/us-china-ev/index.html"><b>US-China</b> Automotive Litigation Database</a>
+    <div class="nav-spacer"></div>
+    <a class="nav-link" href="/us-china-ev/search.html">Search</a>
+    <a class="nav-link" href="/us-china-ev/about.html">About</a>
+    <a class="nav-link" href="#">Methodology</a>
+    <a class="nav-link" href="#">FAQs</a>
+    <a class="nav-link" href="#">Data download</a>
+    <button class="nav-btn">Subscribe →</button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-label">U.S. Courts &nbsp;·&nbsp; Chinese People's Courts &nbsp;·&nbsp; Updated monthly</div>
+    <h1 class="hero-title">Tracking <em>automobile litigation</em><br>across the U.S. and China</h1>
+    <p class="hero-body">The first open-access database of automotive court proceedings in both U.S. federal and state courts and Chinese people's courts — covering product liability, EV disputes, emissions enforcement, IP infringement, and consumer protection.</p>
+    <div class="search-row">
+      <input type="text" id="hero-search" placeholder="Search by case name, court, party, claim type, keyword…" aria-label="Search cases">
+      <button class="search-btn" onclick="goSearch()">Search cases</button>
+    </div>
+    <div class="browse-row">
+      <span class="browse-label">Browse:</span>
+      <span class="btag" onclick="goSearchTag('Product liability')">Product liability</span>
+      <span class="btag" onclick="goSearchTag('EV battery')">EV battery</span>
+      <span class="btag" onclick="goSearchTag('Emissions')">Emissions fraud</span>
+      <span class="btag" onclick="goSearchTag('IP')">Patent / IP</span>
+      <span class="btag" onclick="goSearchTag('Autonomous vehicle')">Autonomous vehicles</span>
+      <span class="btag" onclick="goSearchTag('Consumer protection')">Consumer protection</span>
+    </div>
+  </section>
+
+  <div class="stats-row">
+    <div class="stat-cell">
+      <div class="stat-n" id="stat-total">—<span class="stat-new" id="stat-new"></span></div>
+      <div class="stat-l">Total cases tracked</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n" id="stat-us">—</div>
+      <div class="stat-l">U.S. cases</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n" id="stat-cn">—</div>
+      <div class="stat-l">Chinese cases</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n" id="stat-ev">—</div>
+      <div class="stat-l">EV-specific cases</div>
+    </div>
+  </div>
+
+  <div class="body-grid">
+    <main class="main-col">
+      <div class="sec-head" id="about">About this database <a class="sec-more" href="/us-china-ev/about.html">Read more →</a></div>
+      <p class="about-text">The US-China Automotive Litigation Database is developed at the University of Denver Sturm College of Law. It is the first open-access resource tracking automobile-related court proceedings comparatively across U.S. federal and state courts and Chinese people's courts. Cases are collected and summarized monthly, with coverage spanning product liability, EV technology disputes, emissions enforcement, intellectual property infringement, and consumer protection claims. If you know of any cases we have missed, please <a href="#" style="color:var(--accent)">contact us</a>.</p>
+
+      <div class="sec-head">Recent cases <a class="sec-more" href="/us-china-ev/search.html">View all →</a></div>
+      <div id="main-cases"><p class="loading-msg">Loading cases…</p></div>
+
+      <div class="split-row">
+        <div class="split-box">
+          <div class="split-flag"><div class="fbar" style="background:var(--accent)"></div>U.S. BREAKDOWN</div>
+          <div class="sline"><span class="sk">Federal courts</span><span class="sv" id="b-federal">—</span></div>
+          <div class="sline"><span class="sk">State courts</span><span class="sv" id="b-state">—</span></div>
+          <div class="sline"><span class="sk">Class actions</span><span class="sv" id="b-class">—</span></div>
+          <div class="sline"><span class="sk">EV-specific</span><span class="sv" id="b-us-ev">—</span></div>
+        </div>
+        <div class="split-box">
+          <div class="split-flag"><div class="fbar" style="background:var(--cn)"></div>CHINA BREAKDOWN</div>
+          <div class="sline"><span class="sk">People's courts</span><span class="sv" id="b-peoples">—</span></div>
+          <div class="sline"><span class="sk">IP courts</span><span class="sv" id="b-ip">—</span></div>
+          <div class="sline"><span class="sk">Public interest (公益诉讼)</span><span class="sv" id="b-public">—</span></div>
+          <div class="sline"><span class="sk">EV-specific</span><span class="sv" id="b-cn-ev">—</span></div>
+        </div>
+      </div>
+    </main>
+
+    <aside class="aside-col">
+      <div class="aside-top">
+        <h3>Loading latest cases…</h3>
+        <p>Cases are added monthly. Each entry includes court, parties, claim type, decision status, and an editorial summary.</p>
+        <a class="aside-link" href="#">Subscribe to updates →</a>
+      </div>
+      <div class="latest-head">
+        <div class="sec-head" style="margin-bottom:14px">Latest additions <a class="sec-more" href="/us-china-ev/search.html">All cases →</a></div>
+      </div>
+      <div class="latest-scroll" id="aside-cases"><p class="loading-msg">Loading…</p></div>
+
+      <div class="aside-map">
+        <div class="sec-head" style="margin-bottom:12px">Case map</div>
+        <div class="map-box">
+          <div class="mdot" style="background:var(--accent);top:36%;left:18%"></div>
+          <div class="mdot" style="background:var(--accent);top:42%;left:22%"></div>
+          <div class="mdot" style="background:var(--accent);top:39%;left:26%"></div>
+          <div class="mdot" style="background:var(--accent);top:44%;left:20%"></div>
+          <div class="mdot" style="background:var(--cn);top:37%;left:71%"></div>
+          <div class="mdot" style="background:var(--cn);top:43%;left:74%"></div>
+          <div class="mdot" style="background:var(--cn);top:48%;left:72%"></div>
+          <div class="mdot" style="background:var(--cn);top:33%;left:69%"></div>
+          <div class="mdot" style="background:var(--both);top:41%;left:67%"></div>
+          <div class="map-caption">Click a dot to explore</div>
+        </div>
+        <div class="map-legend">
+          <div class="leg"><div class="ldot" style="background:var(--accent)"></div>U.S.</div>
+          <div class="leg"><div class="ldot" style="background:var(--cn)"></div>China</div>
+          <div class="leg"><div class="ldot" style="background:var(--both)"></div>Cross-border</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="nl-band">
+    <div class="nl-left">
+      <h2>Stay up to date</h2>
+      <p>Subscribe to the monthly newsletter for new case additions, decision summaries, and research updates across both jurisdictions.</p>
+    </div>
+    <div class="nl-form">
+      <input type="email" placeholder="Your email address" aria-label="Email address">
+      <button type="button">Subscribe →</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-left">
+      © 2026 University of Denver Sturm College of Law<br>
+      US-China Automotive Litigation Database
+    </div>
+    <div class="footer-links">
+      <a href="/us-china-ev/index.html">Home</a>
+      <a href="/us-china-ev/search.html">Search</a>
+      <a href="/us-china-ev/about.html">About</a>
+      <a href="#">Methodology</a>
+      <a href="#">FAQs</a>
+      <a href="#">Data download</a>
+      <a href="#">Terms of use</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+  <div class="disclaimer">The materials on this website are intended to provide a general summary of the law and do not constitute legal advice. You should consult with counsel to determine applicable legal requirements in a specific fact situation.</div>
+
+</div>
+
+<script>
+function badgeClass(j) {
+  if (j === 'US') return 'j-us';
+  if (j === 'CN') return 'j-cn';
+  return 'j-both';
+}
+function badgeLabel(j) {
+  if (j === 'US') return 'U.S.';
+  if (j === 'CN') return 'China';
+  return 'US + CN';
+}
+function formatDate(d) {
+  if (!d) return '';
+  var p = d.split('-');
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return months[parseInt(p[1])-1] + ' ' + parseInt(p[2]) + ', ' + p[0];
+}
+function goSearch() {
+  var q = document.getElementById('hero-search').value.trim();
+  if (q) window.location.href = '/us-china-ev/search.html?q=' + encodeURIComponent(q);
+  else window.location.href = '/us-china-ev/search.html';
+}
+function goSearchTag(tag) {
+  window.location.href = '/us-china-ev/search.html?q=' + encodeURIComponent(tag);
+}
+document.getElementById('hero-search').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') goSearch();
+});
+
+fetch('/us-china-ev/cases.json')
+  .then(function(r) { return r.json(); })
+  .then(function(cases) {
+
+    // Stats
+    var total = cases.length;
+    var usCases = cases.filter(function(c) { return c.jurisdiction === 'US'; });
+    var cnCases = cases.filter(function(c) { return c.jurisdiction === 'CN'; });
+    var evCases = cases.filter(function(c) { return c.vehicle_type === 'EV'; });
+    var classCases = cases.filter(function(c) { return c.claim_types.indexOf('Class action') >= 0; });
+
+    document.getElementById('stat-total').innerHTML = total + '<span class="stat-new" style="font-size:10px;color:var(--green);font-family:DM Mono,monospace;margin-left:6px">updated</span>';
+    document.getElementById('stat-us').textContent = usCases.length;
+    document.getElementById('stat-cn').textContent = cnCases.length;
+    document.getElementById('stat-ev').textContent = evCases.length;
+
+    // Breakdown boxes — computed from JSON
+    document.getElementById('b-federal').textContent = usCases.filter(function(c){ return c.court && c.court.match(/\b(N\.D\.|S\.D\.|E\.D\.|W\.D\.|D\.|Cir\.)/); }).length || usCases.length;
+    document.getElementById('b-state').textContent = usCases.filter(function(c){ return c.court && c.court.match(/Cal\.|Super\.|State/i); }).length || '—';
+    document.getElementById('b-class').textContent = classCases.length;
+    document.getElementById('b-us-ev').textContent = usCases.filter(function(c){ return c.vehicle_type === 'EV'; }).length;
+    document.getElementById('b-peoples').textContent = cnCases.filter(function(c){ return c.court && c.court.match(/People/i); }).length || cnCases.length;
+    document.getElementById('b-ip').textContent = cnCases.filter(function(c){ return c.court && c.court.match(/IP/i); }).length || '—';
+    document.getElementById('b-public').textContent = cnCases.filter(function(c){ return c.claim_types.indexOf('Public interest litigation') >= 0; }).length;
+    document.getElementById('b-cn-ev').textContent = cnCases.filter(function(c){ return c.vehicle_type === 'EV'; }).length;
+
+    // Sort by added date desc, take 5 for main col
+    var sorted = cases.slice().sort(function(a,b){ return b.added.localeCompare(a.added); });
+    var recent = sorted.slice(0, 5);
+
+    // Main column cases
+    var mainHtml = '';
+    recent.forEach(function(c) {
+      mainHtml += '<article class="case-row" onclick="window.location.href='/us-china-ev/search.html'">';
+      mainHtml += '<div class="case-top"><div class="case-title">' + c.title + '</div>';
+      mainHtml += '<span class="jbadge ' + badgeClass(c.jurisdiction) + '">' + badgeLabel(c.jurisdiction) + '</span></div>';
+      mainHtml += '<div class="case-sub">' + c.court + (c.filed ? ' &nbsp;·&nbsp; Filed ' + formatDate(c.filed) : '') + (c.status ? ' &nbsp;·&nbsp; ' + c.status : '') + '</div>';
+      mainHtml += '<div class="case-tags">';
+      c.tags.slice(0,4).forEach(function(t){ mainHtml += '<span class="ctag">' + t + '</span>'; });
+      mainHtml += '</div></article>';
+    });
+    document.getElementById('main-cases').innerHTML = mainHtml;
+
+    // Aside latest feed — all cases, compact
+    var asideHtml = '';
+    sorted.forEach(function(c) {
+      var isNew = c.added >= '2026-03-01';
+      asideHtml += '<div class="lcase" onclick="window.location.href='/us-china-ev/search.html'">';
+      asideHtml += '<div class="lc-top"><div class="lc-title">' + c.title + '</div>';
+      if (isNew) asideHtml += '<div class="new-dot" title="New this month"></div>';
+      asideHtml += '</div>';
+      asideHtml += '<div class="lc-meta">' + badgeLabel(c.jurisdiction) + ' &nbsp;·&nbsp; ' + c.court + (c.filed ? ' &nbsp;·&nbsp; ' + formatDate(c.filed) : '') + '</div>';
+      asideHtml += '<div class="lc-tags"><span class="jbadge ' + badgeClass(c.jurisdiction) + '" style="font-size:9px;margin-top:0">' + badgeLabel(c.jurisdiction) + '</span>';
+      c.tags.slice(0,2).forEach(function(t){ asideHtml += '<span class="lctag">' + t + '</span>'; });
+      asideHtml += '</div></div>';
+    });
+    document.getElementById('aside-cases').innerHTML = asideHtml;
+  })
+  .catch(function() {
+    document.getElementById('main-cases').innerHTML = '<p style="font-size:12px;color:var(--ink-light)">Could not load cases. Make sure cases.json is in the same folder.</p>';
+    document.getElementById('aside-cases').innerHTML = '';
+  });
+</script>
+</body>
+</html>
